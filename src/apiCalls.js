@@ -1,6 +1,4 @@
-import React from 'react';
-
-export const getReservations = () => {
-  return fetch('http://localhost:3001/api/v1/reservations')
-    .then(response => response.json())
+export const getReservations = async () => {
+  const response = await fetch('http://localhost:3001/api/v1/reservations');
+  return await response.json();
 }
