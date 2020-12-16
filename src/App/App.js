@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getReservations } from '../apiCalls';
+import ResContainer from '../ResContainer/ResContainer';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,22 @@ class App extends Component {
       .then(reservations => this.setState({reservations: reservations}))
   }
 
+  formatReservations() {
+    return this.state.reservations.map((reservation) => {
+      return (
+        <>
+          <section className='reservation-card'>
+            <p className='resy-name'>{`${reservation.name}`}</p>
+            <p className='resy-date'>{`${reservation.date}`}</p>
+            <p className='resy-time'>{`${reservation.time}`}</p>
+            <p className='resy-count'>Number of guests: {`${reservation.number}`}</p>
+            <button className="button cancel-button">Cancel</button>
+          </section>
+        </>
+      )
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -23,7 +40,7 @@ class App extends Component {
 
         </div>
         <div className='resy-container'>
-          
+          <ResContainer reservations={this.state.reservations} formatReservations={this.formatReservations} />
         </div>
       </div>
     )
