@@ -11,26 +11,11 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     getReservations()
       .then(reservations => this.setState({reservations: reservations}))
   }
 
-  formatReservations() {
-    return this.state.reservations.map((reservation) => {
-      return (
-        <>
-          <section className='reservation-card'>
-            <p className='resy-name'>{`${reservation.name}`}</p>
-            <p className='resy-date'>{`${reservation.date}`}</p>
-            <p className='resy-time'>{`${reservation.time}`}</p>
-            <p className='resy-count'>Number of guests: {`${reservation.number}`}</p>
-            <button className="button cancel-button">Cancel</button>
-          </section>
-        </>
-      )
-    })
-  }
 
   render() {
     return (
@@ -40,7 +25,7 @@ class App extends Component {
 
         </div>
         <div className='resy-container'>
-          <ResContainer reservations={this.state.reservations} formatReservations={this.formatReservations} />
+          <ResContainer reservations={this.state.reservations} />
         </div>
       </div>
     )
